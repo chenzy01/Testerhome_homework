@@ -1,0 +1,9 @@
+default: test
+test/dev.com:
+  dev: 10.10.10.1233
+  test: 10.10.10.2222
+
+array:
+  - 3
+  - 2
+  - 1
