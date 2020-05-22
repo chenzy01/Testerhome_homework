@@ -11,12 +11,12 @@ class Department(BaseApi):
     delete_url = "https://qyapi.weixin.qq.com/cgi-bin/department/delete"
 
     def list(self, id=None):
-        r = requests.get(self.list_url, params={"access_token": WeWork.get_token(), "id": id}).json()
-        self.verbose(r)
-        return r
+        self.json_data = requests.get(self.list_url, params={"access_token": WeWork.get_token(), "id": id}).json()
+        self.verbose(self.json_data)
+        return self.json_data
 
     def create(self, name, parentid, order, id):
-        r = requests.post(self.create_url,
+        self.json_data = requests.post(self.create_url,
                           params={"access_token": WeWork.get_token()},
                           json={
                               "name": name,
@@ -24,8 +24,8 @@ class Department(BaseApi):
                               "order": order,
                               "id": id}
                           ).json()
-        self.verbose(r)
-        return r
+        self.verbose(self.json_data)
+        return self.json_data
 
     def delete(self, id):
         r = requests.get(self.delete_url, params={"access_token": WeWork.get_token(), "id": id}).json()
