@@ -1,6 +1,6 @@
 import requests
 
-from test_wework_api.api.BaseApi import BaseApi
+from test_wework_api.api.base_api import BaseApi
 from test_wework_api.api.wework import WeWork
 from test_wework_api.utils.Utils import Utils
 
@@ -15,7 +15,7 @@ class Department(BaseApi):
         self.verbose(self.json_data)
         return self.json_data
 
-    def create(self, name, parentid, order, id):
+    def create(self, name, parentid, order, id=None):
         self.json_data = requests.post(self.create_url,
                           params={"access_token": WeWork.get_token()},
                           json={
