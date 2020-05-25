@@ -1,6 +1,8 @@
 
 import pytest
+import requests
 from yaml import load, dump
+import test_yaml
 
 
 def test_yaml():
@@ -34,3 +36,24 @@ def test_read_yaml_demo():
 @pytest.mark.parametrize("num", load(open("demo.yaml", "r"))["array"])  # 结合 pytest 参数化方式
 def test_yaml_by_pytest(num):
     assert num > 1
+
+
+class HttpApi:
+    def __init__(self, method, url, query):
+        self.method = method
+        self.url = url
+        self.query = query
+
+    def send(self):
+        return requests.request(self.method, self.url, params=self.query).json()
+
+
+def test_get_data():
+    # req = HttpApi("get", "https://testerhome.com/api/v3/topics.json", {"limit": 2})
+
+    req: HttpApi = load(open("httpapi.yaml", "r"))
+    print(req.send())
+    # print(req)
+    # print(dump(req))
+#    print(req.send())
+
